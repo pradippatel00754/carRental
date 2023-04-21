@@ -1,0 +1,109 @@
+{% extends 'customer/base.html' %}
+{% block title %} Booked Cars {% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid py-4">
+<div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Booked Car</h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                <th class="text-uppercase text-secondary text-xxs  font-weight-bolder opacity-7 ps-2">Customer</th>
+                <th class="text-uppercase text-secondary text-xxs  font-weight-bolder opacity-7 ps-2">Car</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Booked</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                </th>
+              </tr>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in resev %}
+              <tr>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      {% if i.status == "DELIVERED" or status == "PENDING" %}
+                      <a class="btn btn-danger" type="button" href="{% url 'cancelcar' i.id %}">
+                        Cancel
+                      </a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <h6 class="mb-0 text-sm">{{i.r_user}}</h6>
+                    </div>
+                  </div>
+                </td>
+                 <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <h6 class="mb-0 text-sm">{{i.r_car}}</h6>
+                    </div>
+                  </div>
+                </td>
+
+                <td class="align-middle text-center text-sm">
+                  <span class="text-xs font-weight-bold"> {{i.price}} </span>
+                </td>
+                <td class="align-middle text-center text-sm">
+                  <span class="text-xs font-weight-bold"> {{i.booked}} </span>
+                </td>
+                {% if i.status == "PENDING" %}
+                <td class="align-middle text-center text-sm">
+                  <span class="badge badge-sm bg-gradient-secondary"> {{i.status}} </span>
+                </td>
+                {% elif i.status == "DELIVERED" %}
+                <td class="align-middle text-center text-sm">
+                  <span class="badge badge-sm bg-gradient-success"> {{i.status}} </span>
+                </td>
+                {% elif i.status == "CANCEL" %}
+                <td class="align-middle text-center text-sm">
+                  <span class="badge badge-sm bg-gradient-danger"> {{i.status}} </span>
+                </td>
+                {% else%}
+                <td class="align-middle text-center text-sm">
+                  <span class="badge badge-sm bg-gradient-info"> {{i.status}} </span>
+                </td>
+                {% endif %}
+<!--                {% if i.availability %}-->
+<!--                <td class="align-middle text-center text-sm">-->
+<!--                  <span class="badge badge-sm bg-gradient-success">Available</span>-->
+<!--                </td>-->
+<!--                {% else %}-->
+<!--                <td class="align-middle text-center text-sm">-->
+<!--                  <span class="badge badge-sm bg-gradient-secondary">Unavailable</span>-->
+<!--                </td>-->
+<!--                {% endif %}-->
+              </tr>
+              {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+<!--<script>-->
+<!--      function update_click(clicked_id){-->
+<!--        document.getElementById("mytext").value = clicked_id-->
+<!--      }-->
+<!--</script>-->
+{% endblock %}

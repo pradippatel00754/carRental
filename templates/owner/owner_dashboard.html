@@ -1,0 +1,161 @@
+{% extends 'owner/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid py-4">
+<div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Car List</h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                <th class="text-uppercase text-secondary text-xxs  font-weight-bolder opacity-7 ps-2">Car Company</th>
+                <th class="text-uppercase text-secondary text-xxs  font-weight-bolder opacity-7 ps-2">Car Model</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Year</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Color</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Car Type</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rate</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Availability
+                </th>
+              </tr>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in carlist %}
+              <tr>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <a class="nav-link mb-0 px-0 py-1 " href="{% url 'updatecar' i.id %}" >
+                        <i class="material-icons text-success text-lg position-relative">edit</i>
+                        <span class="ms-1">Edit</span>
+                      </a>
+                      <a class="nav-link mb-0 px-0 py-1 pe-auto" href="" onclick="delFun( {{i.id}} )">
+                        <i class="material-icons text-danger pe-auto text-lg position-relative">delete</i>
+                        <span class="ms-1">Delete</span>
+                      </a>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <h6 class="mb-0 text-sm">{{i.carcompany}}</h6>
+                    </div>
+                  </div>
+                </td>
+                 <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <h6 class="mb-0 text-sm">{{i.car_model}}</h6>
+                    </div>
+                  </div>
+                </td>
+
+                <td class="align-middle text-center text-sm">
+                  <span class="text-xs font-weight-bold"> {{i.year}} </span>
+                </td>
+                <td class="align-middle text-center text-sm">
+                  <span class="text-xs font-weight-bold"> {{i.color}} </span>
+                </td>
+                <td class="align-middle text-center text-sm">
+                  <span class="text-xs font-weight-bold"> {{i.cartype}} </span>
+                </td>
+                <td class="align-middle text-center text-sm">
+                  <span class="text-xs font-weight-bold"> {{i.rentalrate}} </span>
+                </td>
+                {% if i.availability %}
+                <td class="align-middle text-center text-sm">
+                  <span class="badge badge-sm bg-gradient-success">Available</span>
+                </td>
+                {% else %}
+                <td class="align-middle text-center text-sm">
+                  <span class="badge badge-sm bg-gradient-secondary">Unavailable</span>
+                </td>
+                {% endif %}
+              </tr>
+              {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+</div>
+
+<script type="text/javascript">
+  function showToaster(message){
+    var toaster = document.getElementById("toaster");
+    toaster.innerHtml = message;
+    toaster.style.display = "block";
+    setTimeout(function(){
+      toaster.style.display = "none";
+    }, 1800);
+  }
+</script>
+
+<script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+"></script>
+<link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css
+" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+  function delFun(clicked_id) {
+<!--      Swal.fire({-->
+<!--        title: 'Are you sure?',-->
+<!--        text: "You won't be able to revert this!",-->
+<!--        icon: 'warning',-->
+<!--        showCancelButton: true,-->
+<!--        confirmButtonColor: '#3085d6',-->
+<!--        cancelButtonColor: '#d33',-->
+<!--        confirmButtonText: 'Yes, delete it!'-->
+<!--      }).then((result) => {-->
+<!--        if (result.isConfirmed) {-->
+<!--          Swal.fire(-->
+<!--            'Deleted!',-->
+<!--            'Your file has been deleted.',-->
+<!--            'success'-->
+<!--          )-->
+<!--        }-->
+<!--      });-->
+
+      var txt;
+      if (confirm("Are you sure you want to Delete ?")) {
+      Swal.fire(
+        'Good job!',
+        'Delete Successfully',
+        'success'
+      )
+        $.ajax({
+          type: "GET",
+          url: "/cars/deletecar/"+clicked_id,
+          success:function(data){
+            showToaster("Delete Successfully");
+            setTimeout(() => {
+              location.reload();
+            }, 2000);
+          },error:function(data){
+            console.log(data);
+            alert("Error");
+          },
+        });
+      }
+  }
+</script>
+
+
+{% endblock %}

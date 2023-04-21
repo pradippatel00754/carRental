@@ -1,0 +1,39 @@
+{% extends 'customer/base.html' %}
+{% block title %} Dashboard {% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="row mb-4">
+  <div class="col-lg-12  col-md-6 mb-md-0 mb-4">
+    <div class="card">
+      <div class="card-header pb-0">
+        <div class="row">
+          <div class="col-lg-6 col-7">
+            <h6>Cars</h6>
+          </div>
+        </div>
+      </div>
+      <div class="card-body px-0 pb-2">
+        <div class="row row-cols-1 p-5 row-cols-md-3 g-4">
+          {% for i in carlist %}
+          <div class="col">
+            <div class="card h-100">
+              <img src="{{i.car_image.url}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{i.carcompany}} {{i.car_model}}</h5>
+                <h6 class="card-text">Rs. {{i.rentalrate}}</h6>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+              </div>
+              <div class="card-footer">
+                <a class="btn bg-gradient-primary mt-4 w-100" href="{% url 'detailscar' i.id %}" type="button">Book</a>
+<!--                <small class="text-body-secondary">Last updated 3 mins ago</small>-->
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

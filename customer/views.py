@@ -18,7 +18,7 @@ class CustomerProfile(LoginRequiredMixin, TemplateView):
 
 class CustomerUpdate(LoginRequiredMixin, UpdateView):
     model = User
-    fields = ('first_name', 'last_name', 'email', 'prof_image', 'age', 'mobile', 'lice_image', 'licence', 'location', 'decs')
+    form_class = CustomerUpdateForm
     template_name = 'customer/update.html'
     success_url = '/customerprofile/'
 
@@ -78,7 +78,6 @@ class CustomerBookedCarListView(LoginRequiredMixin, TemplateView):
         context['resev'] = context['resev'].filter(r_user=self.request.user)
         return context
 
-# class CancelOrder(LoginRequiredMixin, TemplateView):
 class FeedbackView(LoginRequiredMixin, CreateView):
     model = FeedbackModel
     form_class = FeedbackForm

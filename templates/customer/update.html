@@ -1,24 +1,35 @@
+{% extends 'customer/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{% static '/img/apple-icon.png' %}">
-  <link rel="icon" type="image/png" href="{% static '/img/favicon.png' %}">
-  <title>
-    Car Rental || Profile Update
-  </title>
-</head>
-
-<body class="bg-gray-200">
-  <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Update">
-  </form>
-{{price}}
-</body>
-
-</html>
+{% block content %}
+  <div class="container-fluid py-4">
+    <div class="row min-vh-80">
+      <div class="col-12 mx-auto">
+        <div class="card mt-4">
+          <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              <h6 class="text-white text-capitalize ps-3">Profile Update</h6>
+            </div>
+          </div>
+          <div class="card-body">
+            <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="modal-body">
+        {% for i in form %}
+          <div class="input-group input-group-outline my-3">
+<!--            <label class="form-label">{{i.label}}</label>-->
+            {{i}}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-secondary mr-2" href="{% url 'customerdashboard' %}">Cancel</a>
+        <input class="btn btn-primary" type="submit" VALUE="Update">
+      </div>
+      </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

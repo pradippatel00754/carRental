@@ -18,7 +18,7 @@ class OwnerProfile(LoginRequiredMixin, TemplateView):
 
 class OwnerUpdate(LoginRequiredMixin, UpdateView):
     model = User
-    fields = ('first_name', 'last_name', 'email', 'prof_image', 'age', 'mobile', 'location', 'decs')
+    form_class = OwnerUpdateForm
     template_name = 'owner/update.html'
     success_url = '/owner/ownerprofile/'
 

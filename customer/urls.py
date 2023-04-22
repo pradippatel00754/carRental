@@ -8,5 +8,4 @@ urlpatterns = [
     path('book2/', BookView.as_view(), name="book2"),
     path('payment/', PaymentView.as_view(), name="payment"),
     path('bookedcarlist/', CustomerBookedCarListView.as_view(), name="bookedcarlist"),
-    # path('cancelcar/<int:pk>/' ,name="cancelcar")
 ]

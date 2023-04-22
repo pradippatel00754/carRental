@@ -26,7 +26,7 @@ class DeleteCarView(LoginRequiredMixin, DeleteView):
 
 class UpdateCarView(LoginRequiredMixin, UpdateView):
     model = Car
-    template_name = 'owner/update.html'
+    template_name = 'owner/carupdate.html'
     form_class = CreateCarForm
     success_url = '/owner/ownerdashboard/'
 

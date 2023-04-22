@@ -19,7 +19,7 @@ class CustomerProfile(LoginRequiredMixin, TemplateView):
 class CustomerUpdate(LoginRequiredMixin, UpdateView):
     model = User
     form_class = CustomerUpdateForm
-    template_name = 'customer/update.html'
+    template_name = 'customer/carupdate.html'
     success_url = '/customerprofile/'
 
 class CustomerDashboard(TemplateView):

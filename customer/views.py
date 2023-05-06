@@ -19,7 +19,7 @@ class CustomerProfile(LoginRequiredMixin, TemplateView):
 class CustomerUpdate(LoginRequiredMixin, UpdateView):
     model = User
     form_class = CustomerUpdateForm
-    template_name = 'customer/carupdate.html'
+    template_name = 'customer/update.html'
     success_url = '/customerprofile/'
 
 class CustomerDashboard(TemplateView):
@@ -39,14 +39,15 @@ class BookView(LoginRequiredMixin, View):
         form = ReservationModel(
             r_user=self.request.user,
             r_car=Car.objects.filter(id=cars)[0],
-            price=Car.objects.filter(id=cars).values_list('rentalrate')[0][0]
+            price=Car.objects.filter(id=cars).values_list('rentalrate')[0][0],
+            return_date = request.POST.get('eddate'),
         )
         form.placeOrder()
         av = Car.objects.get(id=cars)
         av.availability = False
         av.save()
         return redirect('payment')
-
+    
 class PaymentView(LoginRequiredMixin, View):
     def get(self,request):
         form = PaymentForm

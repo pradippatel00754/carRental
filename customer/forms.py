@@ -29,6 +29,6 @@ class CustomerUpdateForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
             'mobile': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Mobile Number'}),
             'age': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Age'}),
-            'licence': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Licence'}),
-            'location': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Locations'}),
+            'licence': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Licence'}),
+            'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Locations'}),
         }

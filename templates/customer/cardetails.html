@@ -19,6 +19,10 @@
                       <form action="{% url 'book2' %}" method="post">
                           {% csrf_token %}
                           <input hidden="hidden" name="cars" type="text" value="{{car.id}}">
+                          <div class="input-group input-group-outline my-3">
+                            <label class="form-label">Return Date</label>
+                            <input type="date" name="eddate" class="form-control">
+                          </div>
                           <input value="Book" type="submit" class="btn btn-primary">
                       </form>
                     <p class="card-text"><small class="text-body-secondary">Last updated {{car.updated_at}}</small></p>

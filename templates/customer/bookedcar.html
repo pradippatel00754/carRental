@@ -23,6 +23,7 @@
                 <th class="text-uppercase text-secondary text-xxs  font-weight-bolder opacity-7 ps-2">Car</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Booked</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Return Date</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                 </th>
               </tr>
@@ -32,7 +33,7 @@
                     {% for i in resev %}
               <tr>
                 <td>
-                  <div class="d-flex px-2 py-1">
+                  {% comment %} <div class="d-flex px-2 py-1">
                     <div class="d-flex flex-column justify-content-center">
                       {% if i.status == "DELIVERED" or status == "PENDING" %}
                       <a class="btn btn-danger" type="button" href="{% url 'cancelcar' i.id %}">
@@ -40,7 +41,7 @@
                       </a>
                       {% endif %}
                     </div>
-                  </div>
+                  </div> {% endcomment %}
                 </td>
                 <td>
                   <div class="d-flex px-2 py-1">
@@ -62,6 +63,9 @@
                 </td>
                 <td class="align-middle text-center text-sm">
                   <span class="text-xs font-weight-bold"> {{i.booked}} </span>
+                </td>
+                <td class="align-middle text-center text-sm">
+                  <span class="text-xs font-weight-bold"> {{i.return_date}} </span>
                 </td>
                 {% if i.status == "PENDING" %}
                 <td class="align-middle text-center text-sm">

@@ -24,6 +24,7 @@ class ReservationModel(models.Model):
     r_car = models.ForeignKey(Car, on_delete=models.CASCADE)
     price = models.FloatField(null=True)
     booked = models.DateTimeField(default=datetime.datetime.today)
+    return_date = models.DateField(null=True)
     status = models.CharField(choices=CHOICE, null=True, max_length=100, default="PENDING")
     return_at = models.DateTimeField(auto_now=True)
 
